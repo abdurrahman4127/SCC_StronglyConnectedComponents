@@ -2,17 +2,17 @@
 using namespace std;
 
 // scanning: src -> dst
-void addEdge(vector<int> graph[], int u, int v){
+void addEdge(vector<int> graph[], int u, int v) {
     graph[u].push_back(v);
 }
 
 // runnng dfs on the transposed graph
-void dfs(int node, vector<int> &visited, vector<int> transpose[]){
+void dfs(int node, vector<int> &visited, vector<int> transpose[]) {
     cout << node << " ";
     visited[node] = 1;
     
-    for(auto i : transpose[node]){
-        if(visited[i] == 0){
+    for(auto i : transpose[node]) {
+        if(visited[i] == 0) {
             dfs(i, visited, transpose);
         }
     }
@@ -20,10 +20,11 @@ void dfs(int node, vector<int> &visited, vector<int> transpose[]){
 
 
 // transposing the graph (dist -> src)
-void findTranspose(vector<int> transpose[], int V, vector<int> graph[], vector<int> &visited){
-    for(int u=0; u<V; u++){
+void findTranspose(vector<int> transpose[], int V, vector<int> graph[], vector<int> &visited) {
+    for(int u=0; u<V; u++) {
         visited[u] = 0;
-        for(auto v : graph[u]){
+        
+        for(auto v : graph[u]) {
             transpose[v].push_back(u);
         }
     }
@@ -31,10 +32,11 @@ void findTranspose(vector<int> transpose[], int V, vector<int> graph[], vector<i
 
 
 // finding finish time
-void dfs_topologicalSort(int node, stack<int> &stk, vector<int> &visited, vector<int> graph[]){
+void dfs_topologicalSort(int node, stack<int> &stk, vector<int> &visited, vector<int> graph[]) {
     visited[node] = 1;
-    for(auto i : graph[node]){
-        if(visited[i] == 0){
+    
+    for(auto i : graph[node]) {
+        if(visited[i] == 0) {
             dfs_topologicalSort(i, stk, visited, graph);
         }
     }
@@ -44,15 +46,15 @@ void dfs_topologicalSort(int node, stack<int> &stk, vector<int> &visited, vector
 
 
 // printing SCC
-void printSCC(stack<int> &stk, vector<int> &visited, vector<int> transpose[]){
+void printSCC(stack<int> &stk, vector<int> &visited, vector<int> transpose[]) {
     int count = 0; 
     
     cout << "strongly connected components: \n";
-    while(!stk.empty()){
+    while(!stk.empty()) {
         int node = stk.top();
         stk.pop();
 
-        if(visited[node] == 0){
+        if(visited[node] == 0) {
             count++; 
             dfs(node, visited, transpose); // dfs on each popped unvisited node 
             cout << endl;
@@ -63,13 +65,15 @@ void printSCC(stack<int> &stk, vector<int> &visited, vector<int> transpose[]){
 }
 
 // main function
-int main(){
+int main() {
     int V, E;
     cin >> V >> E;
 
     vector<int> graph[V];
-    for(int i=0; i<E; i++){
-        int u, v; cin >> u >> v;
+    for(int i=0; i<E; i++) {
+        int u, v; 
+        cin >> u >> v;
+        
         addEdge(graph, u, v);
     }
 
