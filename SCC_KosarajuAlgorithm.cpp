@@ -1,7 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// scanning: src -> dst
+void addEdge(vector<int> graph[], int u, int v){
+    graph[u].push_back(v);
+}
 
+// runnng dfs on the transposed graph
 void dfs(int node, vector<int> &visited, vector<int> transpose[]){
     cout << node << " ";
     visited[node] = 1;
@@ -57,13 +62,7 @@ void printSCC(stack<int> &stk, vector<int> &visited, vector<int> transpose[]){
     cout << "number of SCC: " << count << endl;
 }
 
-
-// src -> dst
-void addEdge(vector<int> graph[], int u, int v){
-    graph[u].push_back(v);
-}
-
-
+// main function
 int main(){
     int V, E;
     cin >> V >> E;
@@ -96,7 +95,7 @@ int main(){
     return 0;
 }
 
-/*
+/* test inputs:
 9 10
 0 1
 1 2
