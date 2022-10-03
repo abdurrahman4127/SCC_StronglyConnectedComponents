@@ -5,6 +5,7 @@ using namespace std;
 void dfs(int node, vector<int> &visited, vector<int> transpose[]){
     cout << node << " ";
     visited[node] = 1;
+    
     for(auto i : transpose[node]){
         if(visited[i] == 0){
             dfs(i, visited, transpose);
@@ -76,6 +77,7 @@ int main(){
     // to store the order
     stack<int> stk;
 
+    // to track un/visited nodes
     vector<int> visited(V, 0); 
     
     // topological sort (DFS) on (unvisited) nodes 
